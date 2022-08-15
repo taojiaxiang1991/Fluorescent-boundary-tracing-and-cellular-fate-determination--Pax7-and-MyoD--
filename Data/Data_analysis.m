@@ -43,7 +43,7 @@ end
 stemcellu = 100*length(find(countu==10))/length(countu);
 proginitorsu = 100*length(find(countu==11))/length(countu);
 diffcellsu = 100*length(find(countu<=1))/length(countu);
-%% p value
+%% p value calcuation
 pvaule_stemcells = MantelHaenTest([length(find(countu==10)),length(find(countu==11))+length(find(countu<=1)); length(find(count==10)),length(find(count==11))+length(find(count<=1))],'ne'); 
 pvalue_diff_cells= MantelHaenTest([length(find(countu==10))+length(find(countu==11)),length(find(countu<=1)); length(find(count==10))+length(find(count==11)),length(find(count<=1))],'ne'); 
 
