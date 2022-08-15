@@ -39,9 +39,15 @@ for i = 1:length(Pax7u)
     if MyoDu(i)>=Mcut; nm = 1; end;
     countu(i) = 10*np+nm; clear np nm;
 end
+%% Calculating the Pax7+/MyoD- (stem cell), Pax7+/MyoD+ (Proginitors), and Pax7- (Diff cells) populational fractions
 stemcellu = 100*length(find(countu==10))/length(countu);
 proginitorsu = 100*length(find(countu==11))/length(countu);
 diffcellsu = 100*length(find(countu<=1))/length(countu);
+%% p value
+pvaule_stemcells = MantelHaenTest([length(find(countu==10)),length(find(countu==11))+length(find(countu<=1)); length(find(count==10)),length(find(count==11))+length(find(count<=1))],'ne'); 
+pvalue_diff_cells= MantelHaenTest([length(find(countu==10))+length(find(countu==11)),length(find(countu<=1)); length(find(count==10))+length(find(count==11)),length(find(count<=1))],'ne'); 
+
+
 
 display(['Among 5d-U cells, ',num2str(stemcellu),'% population is Pax7^+ MyoD^-; ',num2str(proginitorsu), '% population is Pax7^+ MyoD^+; and ',num2str(diffcellsu),'% population is Pax7^-']);
 display(['Among 2+3d-C cells, ',num2str(stemcell),'% population is Pax7^+ MyoD^-; ',num2str(proginitors), '% population is Pax7^+ MyoD^+; and ',num2str(diffcells),'% population is Pax7^-']);
